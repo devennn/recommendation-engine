@@ -14,6 +14,7 @@ def train_new_user():
                                 )
 
     # Normalize the ratings (center them around their mean)
+    print(ratings_df)
     normalized_ratings, means = matrix.norm_rtngs(ratings_df.as_matrix())
 
     # Apply matrix factorization to find the latent features
@@ -28,4 +29,9 @@ def train_new_user():
     # Add back in the mean ratings for each product to de-normalize the predicted results
     predicted_ratings = predicted_ratings + means
 
-    save_result(U, M, predicted_ratings, means=means)
+    save_result(U, M, predicted_ratings)
+
+    path = os.path.join(Path('.').parent.absolute(), 'result', 'means.dat')
+    with open(path, 'wb') as f:
+        pkl.dump(means, f)
+    path = ''

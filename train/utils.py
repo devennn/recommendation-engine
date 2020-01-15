@@ -9,7 +9,7 @@ def load_data():
     path = os.path.join(path, 'dataset', 'movie_ratings_data_set.csv')
     return pd.read_csv(path)
 
-def save_result(U, M, predicted_ratings, means):
+def save_result(U, M, predicted_ratings):
 
     # Load user ratings
     path = Path('.').parent.absolute()
@@ -20,7 +20,3 @@ def save_result(U, M, predicted_ratings, means):
     pkl.dump(U, open(path1, "wb"))
     pkl.dump(M, open(path2, "wb"))
     pkl.dump(predicted_ratings, open(path3, "wb"))
-
-    if(len(means) != 0):
-        path3 = os.path.join(path, 'result', 'means.dat')
-        pkl.dump(means, open(path3, "wb" ))
